@@ -1,0 +1,76 @@
+name: SocialBuild
+version: 0.0.1
+discription: social build!
+authhor: unhappychoice
+website: http://juudenki.ddo.jp
+main: socialbuild.SocialBuild
+prefix: [SocialBuild]
+depend: [PermissionsEx]
+softdepend: []
+
+commands:
+  sb:
+    description: SocialBuild Command
+    usage: /sb (top),(playername)
+
+permissions:
+  sb.*:
+    description: gives all social build permissions.
+    default: op
+    children:
+      sb.place: true
+      sb.break: true
+      sb.top: true
+      sb.self: true
+      sb.other: true
+      sb.reload: true
+      sb.vote: true
+      sb.cancel: true
+      sb.break.other: true
+  sb.user:
+    description: gives user permissions.
+    default: true
+    children:
+      sb.place: true
+      sb.break: true
+      sb.top: true
+      sb.self: true
+      sb.other: true
+  sb.voter:
+    description: gives vote permissions.
+    default: false
+    children:
+      sb.place: true
+      sb.break: true
+      sb.top: true
+      sb.self: true
+      sb.other: true
+      sb.vote: true
+      sb.cancel: true
+  sb.place:
+    description: can place SocialBuild sign
+    default: op
+  sb.break:
+    description: can break SocialBuild sign
+    default: op
+  sb.top:
+    description: can see SocialBuild ranking
+    default: op
+  sb.self:
+    description: can see own goods
+    default: op
+  sb.other:
+    description: can see other goods
+    default: op
+  sb.relaod:
+    description: can reload config file
+    default: op
+  sb.vote:
+    description: can give a good
+    default: op
+  sb.cancel:
+    description: can cancel a good
+    default: op
+  sb.break.other:
+    description: can break other sign
+    default: op
