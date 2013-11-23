@@ -150,7 +150,7 @@ public class SQLWrapper extends JavaPlugin {
 			log.info(e.getMessage());
 		}
 	}
-	
+
 	// /////////////////////////////////
 	// //////DeletePlayerColumn///////////
 	// /////////////////////////////////

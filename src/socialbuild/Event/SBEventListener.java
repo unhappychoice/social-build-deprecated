@@ -23,7 +23,7 @@ public class SBEventListener implements Listener {
 
 		player_join_event = new SBPlayerJoinEvent();
 		player_join_event.execution(e);
-		
+
 	}
 
 	@EventHandler

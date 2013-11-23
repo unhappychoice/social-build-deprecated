@@ -39,15 +39,12 @@ public class Messages {
 
 		try {
 
-			ERROR_NO_PERM = ChatColor.RED 
-					+ bundle.getString("error_no_perm");
+			ERROR_NO_PERM = ChatColor.RED + bundle.getString("error_no_perm");
 			ERROR_SELF_GOOD = ChatColor.RED
 					+ bundle.getString("error_self_good");
-			ERROR_BREAK = ChatColor.RED 
-					+ bundle.getString("error_break");
+			ERROR_BREAK = ChatColor.RED + bundle.getString("error_break");
 
-			PLAYER_GIVE = ChatColor.DARK_AQUA 
-					+ bundle.getString("player_give");
+			PLAYER_GIVE = ChatColor.DARK_AQUA + bundle.getString("player_give");
 			PLAYER_GIVEN = ChatColor.DARK_AQUA
 					+ bundle.getString("player_given");
 			PLAYER_CANCEL = ChatColor.DARK_AQUA
@@ -59,8 +56,7 @@ public class Messages {
 			PLAYER_DEMOTED = ChatColor.YELLOW
 					+ bundle.getString("player_demoted");
 
-			SIGN_CREATE = ChatColor.DARK_AQUA 
-					+ bundle.getString("sign_create");
+			SIGN_CREATE = ChatColor.DARK_AQUA + bundle.getString("sign_create");
 
 		} catch (MissingResourceException e) {
 			e.getStackTrace();

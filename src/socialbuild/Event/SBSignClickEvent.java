@@ -41,20 +41,20 @@ public class SBSignClickEvent {
 
 				if (sign.getLine(0).equals(ChatColor.BLUE + "SocialBuild")) {
 
-					//Left Click
+					// Left Click
 					if (e.getAction().equals(Action.LEFT_CLICK_BLOCK)) {
-						if (permission.checkPermission(player, "sb.vote")){
-						
+						if (permission.checkPermission(player, "sb.vote")) {
+
 							LeftClick(sign, playername, e);
-						
+
 						}
-					
-					//Right Click
+
+						// Right Click
 					} else if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
-						if (permission.checkPermission(player, "sb.cancel")){
-							
+						if (permission.checkPermission(player, "sb.cancel")) {
+
 							RightClick(sign, playername, e);
-					
+
 						}
 					}
 				}

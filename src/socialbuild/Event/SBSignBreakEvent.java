@@ -32,17 +32,17 @@ public class SBSignBreakEvent {
 			// Get Sign Location
 			Sign sign = (Sign) e.getBlock().getState();
 			Player player = e.getPlayer();
-			
+
 			int x = sign.getLocation().getBlockX();
 			int y = sign.getLocation().getBlockY();
 			int z = sign.getLocation().getBlockZ();
 
 			// Check if there is the sign and Get ID
 			int signid = sql.isSign(x, y, z);
-			if (signid != -1 ) {
-				
-				//Check permission
-				if(!permission.checkPermission(player, "sb.break")){
+			if (signid != -1) {
+
+				// Check permission
+				if (!permission.checkPermission(player, "sb.break")) {
 					return;
 				}
 
@@ -50,25 +50,27 @@ public class SBSignBreakEvent {
 				owner = sql.getOwner(signid);
 
 				// Check can break sign
-				if ( ( player.getName().equals(owner) || player.hasPermission("sb.break.other") ) && player.getGameMode().equals(GameMode.SURVIVAL)) {
-					
+				if ((player.getName().equals(owner) || player
+						.hasPermission("sb.break.other"))
+						&& player.getGameMode().equals(GameMode.SURVIVAL)) {
+
 					sql.deleteSign(x, y, z);
 					sql.deletePlayer(signid);
 					sql.CaliculatePlayerCount(owner);
-					
+
 					// demote
 					if (sql.getPlayerCount(owner) == Config.PROMOTE_GOOD.get(0) - 1) {
 						permission.demoteGroup(owner);
 					}
-					
+
 				}
-				
-				else{
-				
+
+				else {
+
 					e.getPlayer().sendMessage(Messages.ERROR_BREAK);
 					e.setCancelled(true);
 					return;
-					
+
 				}
 
 			}

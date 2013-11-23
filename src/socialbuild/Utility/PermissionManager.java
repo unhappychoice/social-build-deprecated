@@ -22,24 +22,24 @@ public class PermissionManager {
 		return instance;
 	}
 
-	public boolean checkPermission(Player player, String permission){
-		if(player.hasPermission(permission)){
+	public boolean checkPermission(Player player, String permission) {
+		if (player.hasPermission(permission)) {
 			return true;
-		}
-		else{
+		} else {
 			player.sendMessage(Messages.ERROR_NO_PERM);
 			return false;
 		}
 	}
-	public boolean checkPermission(CommandSender sender, String permission){
-		if(sender.hasPermission(permission)){
+
+	public boolean checkPermission(CommandSender sender, String permission) {
+		if (sender.hasPermission(permission)) {
 			return true;
-		}
-		else{
+		} else {
 			sender.sendMessage(Messages.ERROR_NO_PERM);
 			return false;
 		}
 	}
+
 	public void promoteGroup(String _user) {
 
 		PermissionUser user = PermissionsEx.getUser(_user);

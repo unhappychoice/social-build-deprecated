@@ -30,33 +30,37 @@ public class SBCommandExecutor implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command cmd, String label,
 			String[] args) {
 
-		if (cmd.getName().equalsIgnoreCase("sb") ) {
+		if (cmd.getName().equalsIgnoreCase("sb")) {
 
-			if (args.length == 0 && permission.checkPermission(sender, "sb.self")) {
-				
+			if (args.length == 0
+					&& permission.checkPermission(sender, "sb.self")) {
+
 				command_show_self(sender);
 				return true;
-				
-			} else if (args[0].equalsIgnoreCase("update") && permission.checkPermission(sender, "sb.update")){
-				
+
+			} else if (args[0].equalsIgnoreCase("update")
+					&& permission.checkPermission(sender, "sb.update")) {
+
 				command_update_owner(sender, args[1], args[2]);
 				return true;
-		
-			} else if (args[0].equalsIgnoreCase("top") && permission.checkPermission(sender, "sb.top")) {
-				
+
+			} else if (args[0].equalsIgnoreCase("top")
+					&& permission.checkPermission(sender, "sb.top")) {
+
 				command_show_top(sender);
 				return true;
-				
-			} else if (args[0].equalsIgnoreCase("reload") && permission.checkPermission(sender, "sb.reload")) {
-				
+
+			} else if (args[0].equalsIgnoreCase("reload")
+					&& permission.checkPermission(sender, "sb.reload")) {
+
 				command_reload(sender);
 				return true;
-			
+
 			} else if (permission.checkPermission(sender, "sb.other")) {
-				
+
 				command_show_other(sender, args[0]);
 				return true;
-			
+
 			}
 
 		}
@@ -116,14 +120,15 @@ public class SBCommandExecutor implements CommandExecutor {
 		return true;
 	}
 
-	private boolean command_update_owner(CommandSender sender, String from_owner, String to_owner){
-		
+	private boolean command_update_owner(CommandSender sender,
+			String from_owner, String to_owner) {
+
 		sql.updateOwner(from_owner, to_owner);
 		sender.sendMessage("Updated Owner!!");
-		
+
 		return true;
 	}
-	
+
 	private JavaPlugin plugin;
 	private SQLWrapper sql;
 	private Logger log;

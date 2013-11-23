@@ -26,12 +26,12 @@ public class SBSignPlaceEvent {
 		if (e.getLine(0).equals("[sb]")) {
 
 			Player player = e.getPlayer();
-			
-			//check permission
-			if(!permission.checkPermission(player, "sb.place")){
+
+			// check permission
+			if (!permission.checkPermission(player, "sb.place")) {
 				return;
 			}
-			
+
 			int x = e.getBlock().getLocation().getBlockX();
 			int y = e.getBlock().getLocation().getBlockY();
 			int z = e.getBlock().getLocation().getBlockZ();
