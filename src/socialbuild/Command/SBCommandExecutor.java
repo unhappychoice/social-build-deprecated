@@ -37,6 +37,11 @@ public class SBCommandExecutor implements CommandExecutor {
 				command_show_self(sender);
 				return true;
 				
+			} else if (args[0].equalsIgnoreCase("update") && permission.checkPermission(sender, "sb.update")){
+				
+				command_update_owner(sender, args[1], args[2]);
+				return true;
+		
 			} else if (args[0].equalsIgnoreCase("top") && permission.checkPermission(sender, "sb.top")) {
 				
 				command_show_top(sender);
@@ -111,6 +116,17 @@ public class SBCommandExecutor implements CommandExecutor {
 		return true;
 	}
 
+	private boolean command_update_owner(CommandSender sender, String from_owner, String to_owner){
+		
+		if(from_owner == null || to_owner == null){
+			sender.sendMessage("INVALID USER");
+			return false;
+		}
+		
+		sql.updateOwner(from_owner, to_owner);
+		
+		return true;
+	}
 	private JavaPlugin plugin;
 	private SQLWrapper sql;
 	private Logger log;
