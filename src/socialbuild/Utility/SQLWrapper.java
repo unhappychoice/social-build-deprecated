@@ -142,8 +142,8 @@ public class SQLWrapper extends JavaPlugin {
 
 		try {
 
-			state.execute("UPDATE sign SET owner = \"" + from_owner
-					+ "\" WHERE owner = \"" + to_owner + "\" ;");
+			state.execute("UPDATE sign SET owner = \"" + to_owner
+					+ "\" WHERE owner = \"" + from_owner + "\" ;");
 
 		} catch (SQLException e) {
 			log.info("UPDATE OWNER ERROR");
