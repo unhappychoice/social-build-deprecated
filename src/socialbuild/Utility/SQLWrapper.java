@@ -136,6 +136,22 @@ public class SQLWrapper extends JavaPlugin {
 	}
 
 	// /////////////////////////////////
+	// ///////updateRankingColumn/////////
+	// /////////////////////////////////
+	public void updateOwner(String from_owner, String to_owner) {
+
+		try {
+
+			state.execute("UPDATE sign SET owner = \"" + from_owner
+					+ "\" WHERE owner = \"" + to_owner + "\" ;");
+
+		} catch (SQLException e) {
+			log.info("UPDATE OWNER ERROR");
+			log.info(e.getMessage());
+		}
+	}
+	
+	// /////////////////////////////////
 	// //////DeletePlayerColumn///////////
 	// /////////////////////////////////
 	public void deletePlayer(int signid) {
