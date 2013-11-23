@@ -19,6 +19,7 @@ import socialbuild.Utility.SQLWrapper;
  */
 public class SocialBuild extends JavaPlugin implements Listener {
 
+	@Override
 	public void onEnable() {
 
 		Initialize();
@@ -26,6 +27,7 @@ public class SocialBuild extends JavaPlugin implements Listener {
 
 	}
 
+	@Override
 	public void onDisable() {
 
 		log.info("Disabeled");

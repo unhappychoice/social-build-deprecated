@@ -62,9 +62,17 @@ public class SQLWrapper extends JavaPlugin {
 	public void isTable() {
 		try {
 
-			state.executeUpdate("CREATE TABLE  ranking(id INTEGER PRIMARY KEY AUTOINCREMENT, playername text, count int);");
-			state.executeUpdate("CREATE TABLE  player (id INTEGER PRIMARY KEY AUTOINCREMENT, playername text, signid int);");
-			state.executeUpdate("CREATE TABLE  sign(id INTEGER PRIMARY KEY AUTOINCREMENT, owner text, x int, y int, z int);");
+			state.executeUpdate("CREATE TABLE  ranking ("
+					+ "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+					+ "playername text, " + "count int);");
+
+			state.executeUpdate("CREATE TABLE  player ("
+					+ "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+					+ "playername text, " + "signid int);");
+
+			state.executeUpdate("CREATE TABLE  sign ("
+					+ "id INTEGER PRIMARY KEY AUTOINCREMENT, " + "owner text, "
+					+ "x int, " + "y int, " + "z int);");
 
 		} catch (SQLException e) {
 			log.info("table are recognized");
