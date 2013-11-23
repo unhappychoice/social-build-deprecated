@@ -26,7 +26,7 @@ public class SBPlayerJoinEvent {
 		sql.CaliculatePlayerCount(playername);
 
 		// demote
-		if (sql.getPlayerCount(playername) <= Config.PROMOTE_GOOD.get(0)) {
+		if (sql.getPlayerCount(playername) < Config.PROMOTE_GOOD.get(0)) {
 			permission.demoteGroup(playername);
 		}
 		// promote
