@@ -19,46 +19,46 @@ import socialbuild.Utility.SQLWrapper;
  */
 public class SocialBuild extends JavaPlugin implements Listener {
 
-	@Override
-	public void onEnable() {
+   @Override
+   public void onEnable() {
 
-		Initialize();
-		log.info("Enabled");
+      Initialize();
+      log.info("Enabled");
 
-	}
+   }
 
-	@Override
-	public void onDisable() {
+   @Override
+   public void onDisable() {
 
-		log.info("Disabeled");
-		sql.close();
+      log.info("Disabeled");
+      sql.close();
 
-	}
+   }
 
-	private void Initialize() {
+   private void Initialize() {
 
-		saveDefaultConfig();
+      saveDefaultConfig();
 
-		log = getLogger();
+      log = getLogger();
 
-		Messages.loadMessages();
-		log.info("Read the Locale File");
+      Messages.loadMessages();
+      log.info("Read the Locale File");
 
-		sql = SQLWrapper.getInstance(log);
-		sql.Connect();
-		sql.isTable();
+      sql = SQLWrapper.getInstance(log);
+      sql.Connect();
+      sql.isTable();
 
-		Config.setConfig(this);
+      Config.setConfig(this);
 
-		executor = new SBCommandExecutor(this, log);
-		getCommand("sb").setExecutor(executor);
+      executor = new SBCommandExecutor(this, log);
+      getCommand("sb").setExecutor(executor);
 
-		getServer().getPluginManager().registerEvents(new SBEventListener(),
-				this);
+      getServer().getPluginManager().registerEvents(new SBEventListener(),
+            this);
 
-	}
+   }
 
-	private Logger log;
-	private SQLWrapper sql;
-	private SBCommandExecutor executor;
+   private Logger log;
+   private SQLWrapper sql;
+   private SBCommandExecutor executor;
 }

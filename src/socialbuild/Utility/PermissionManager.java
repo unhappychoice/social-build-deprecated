@@ -15,62 +15,62 @@ import ru.tehkode.permissions.bukkit.PermissionsEx;
  */
 public class PermissionManager {
 
-	private PermissionManager() {
-	}
+   private PermissionManager() {
+   }
 
-	public static PermissionManager getInstance() {
-		return instance;
-	}
+   public static PermissionManager getInstance() {
+      return instance;
+   }
 
-	public boolean checkPermission(Player player, String permission) {
-		if (player.hasPermission(permission)) {
-			return true;
-		} else {
-			player.sendMessage(Messages.ERROR_NO_PERM);
-			return false;
-		}
-	}
+   public boolean checkPermission(Player player, String permission) {
+      if (player.hasPermission(permission)) {
+         return true;
+      } else {
+         player.sendMessage(Messages.ERROR_NO_PERM);
+         return false;
+      }
+   }
 
-	public boolean checkPermission(CommandSender sender, String permission) {
-		if (sender.hasPermission(permission)) {
-			return true;
-		} else {
-			sender.sendMessage(Messages.ERROR_NO_PERM);
-			return false;
-		}
-	}
+   public boolean checkPermission(CommandSender sender, String permission) {
+      if (sender.hasPermission(permission)) {
+         return true;
+      } else {
+         sender.sendMessage(Messages.ERROR_NO_PERM);
+         return false;
+      }
+   }
 
-	public void promoteGroup(String _user) {
+   public void promoteGroup(String _user) {
 
-		PermissionUser user = PermissionsEx.getUser(_user);
-		String[] groups = user.getGroupsNames();
+      PermissionUser user = PermissionsEx.getUser(_user);
+      String[] groups = user.getGroupsNames();
 
-		for (String groupname : groups) {
-			if (groupname.equals(Config.GROUP_NAME.get(0))) {
+      for (String groupname : groups) {
+         if (groupname.equals(Config.GROUP_NAME.get(0))) {
 
-				user.addGroup(Config.GROUP_NAME.get(1));
-				user.removeGroup(Config.GROUP_NAME.get(0));
-				Bukkit.broadcastMessage(_user + Messages.PLAYER_PROMOTED);
+            user.addGroup(Config.GROUP_NAME.get(1));
+            user.removeGroup(Config.GROUP_NAME.get(0));
+            Bukkit.broadcastMessage(_user + Messages.PLAYER_PROMOTED);
 
-			}
-		}
-	}
+         }
+      }
+   }
 
-	public void demoteGroup(String _user) {
+   public void demoteGroup(String _user) {
 
-		PermissionUser user = PermissionsEx.getUser(_user);
-		String[] groups = user.getGroupsNames();
+      PermissionUser user = PermissionsEx.getUser(_user);
+      String[] groups = user.getGroupsNames();
 
-		for (String groupname : groups) {
-			if (groupname.equals(Config.GROUP_NAME.get(1))) {
+      for (String groupname : groups) {
+         if (groupname.equals(Config.GROUP_NAME.get(1))) {
 
-				user.removeGroup(Config.GROUP_NAME.get(1));
-				user.addGroup(Config.GROUP_NAME.get(0));
-				Bukkit.broadcastMessage(_user + Messages.PLAYER_DEMOTED);
+            user.removeGroup(Config.GROUP_NAME.get(1));
+            user.addGroup(Config.GROUP_NAME.get(0));
+            Bukkit.broadcastMessage(_user + Messages.PLAYER_DEMOTED);
 
-			}
-		}
-	}
+         }
+      }
+   }
 
-	private static PermissionManager instance = new PermissionManager();
+   private static PermissionManager instance = new PermissionManager();
 }
