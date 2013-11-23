@@ -118,15 +118,12 @@ public class SBCommandExecutor implements CommandExecutor {
 
 	private boolean command_update_owner(CommandSender sender, String from_owner, String to_owner){
 		
-		if(from_owner == null || to_owner == null){
-			sender.sendMessage("INVALID USER");
-			return false;
-		}
-		
 		sql.updateOwner(from_owner, to_owner);
+		sender.sendMessage("Updated Owner!!");
 		
 		return true;
 	}
+	
 	private JavaPlugin plugin;
 	private SQLWrapper sql;
 	private Logger log;
