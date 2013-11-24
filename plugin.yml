@@ -4,7 +4,7 @@ discription: social build!
 authhor: unhappychoice
 website: http://juudenki.ddo.jp
 main: socialbuild.SocialBuild
-prefix: [SocialBuild]
+prefix: SocialBuild
 depend: [PermissionsEx]
 softdepend: []
 
