@@ -28,7 +28,7 @@ public class SBSignPlaceEvent {
          Player player = e.getPlayer();
 
          // check _permission
-         if (!_permission.checkPermission(player, "sb.place")) {
+         if (!_permission.hasPermission(player, "sb.place")) {
             return;
          }
 

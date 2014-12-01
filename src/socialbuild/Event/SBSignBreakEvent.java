@@ -41,7 +41,7 @@ public class SBSignBreakEvent {
          if (signid != -1) {
 
             // Check permission
-            if (!_permission.checkPermission(player, "sb.break")) {
+            if (!_permission.hasPermission(player, "sb.break")) {
                return;
             }
 

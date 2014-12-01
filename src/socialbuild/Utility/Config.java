@@ -16,8 +16,6 @@ public class Config {
    public static ArrayList<String> GROUP_NAME;
    public static ArrayList<Integer> PROMOTE_GOOD;
 
-
-
    public static Config setConfig(JavaPlugin plugin) {
 
       instance.plugin = plugin;

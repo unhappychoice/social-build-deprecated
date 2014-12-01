@@ -21,53 +21,47 @@ public class PermissionManager {
       return instance;
    }
 
-   public boolean checkPermission(Player player, String permission) {
+   public boolean hasPermission(Player player, String permission) {
       if (player.hasPermission(permission)) {
          return true;
-      } else {
-         player.sendMessage(Messages.ERROR_NO_PERM);
-         return false;
       }
+      player.sendMessage(Messages.ERROR_NO_PERM);
+      return false;
    }
 
-   public boolean checkPermission(CommandSender sender, String permission) {
+   public boolean hasPermission(CommandSender sender, String permission) {
       if (sender.hasPermission(permission)) {
          return true;
-      } else {
-         sender.sendMessage(Messages.ERROR_NO_PERM);
-         return false;
       }
+      sender.sendMessage(Messages.ERROR_NO_PERM);
+      return false;
    }
 
    public void promoteGroup(String _user) {
-
       PermissionUser user = PermissionsEx.getUser(_user);
       String[] groups = user.getGroupsNames();
 
       for (String groupname : groups) {
-         if (groupname.equals(Config.GROUP_NAME.get(0))) {
-
-            user.addGroup(Config.GROUP_NAME.get(1));
-            user.removeGroup(Config.GROUP_NAME.get(0));
-            Bukkit.broadcastMessage(_user + Messages.PLAYER_PROMOTED);
-
+         if (!groupname.equals(Config.GROUP_NAME.get(0))) {
+            continue;
          }
+         user.addGroup(Config.GROUP_NAME.get(1));
+         user.removeGroup(Config.GROUP_NAME.get(0));
+         Bukkit.broadcastMessage(_user + Messages.PLAYER_PROMOTED);
       }
    }
 
    public void demoteGroup(String _user) {
-
       PermissionUser user = PermissionsEx.getUser(_user);
       String[] groups = user.getGroupsNames();
 
       for (String groupname : groups) {
-         if (groupname.equals(Config.GROUP_NAME.get(1))) {
-
-            user.removeGroup(Config.GROUP_NAME.get(1));
-            user.addGroup(Config.GROUP_NAME.get(0));
-            Bukkit.broadcastMessage(_user + Messages.PLAYER_DEMOTED);
-
+         if (!groupname.equals(Config.GROUP_NAME.get(1))) {
+            continue;
          }
+         user.removeGroup(Config.GROUP_NAME.get(1));
+         user.addGroup(Config.GROUP_NAME.get(0));
+         Bukkit.broadcastMessage(_user + Messages.PLAYER_DEMOTED);
       }
    }
 

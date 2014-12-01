@@ -43,7 +43,7 @@ public class SBSignClickEvent {
 
                // Left Click
                if (e.getAction().equals(Action.LEFT_CLICK_BLOCK)) {
-                  if (_permission.checkPermission(player, "sb.vote")) {
+                  if (_permission.hasPermission(player, "sb.vote")) {
 
                      LeftClick(sign, playername, e);
 
@@ -51,7 +51,7 @@ public class SBSignClickEvent {
 
                   // Right Click
                } else if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
-                  if (_permission.checkPermission(player, "sb.cancel")) {
+                  if (_permission.hasPermission(player, "sb.cancel")) {
 
                      RightClick(sign, playername, e);
 
