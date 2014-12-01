@@ -4,3 +4,7 @@
 *.jardesc
 doc/
 bin/
+.idea/
+lib/
+*.iml
+
