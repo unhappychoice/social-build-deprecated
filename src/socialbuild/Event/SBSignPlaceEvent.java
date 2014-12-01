@@ -17,8 +17,8 @@ import socialbuild.Utility.SQLWrapper;
 public class SBSignPlaceEvent {
 
    public SBSignPlaceEvent() {
-      sql = SQLWrapper.getInstance();
-      permission = PermissionManager.getInstance();
+      _sql = SQLWrapper.getInstance();
+      _permission = PermissionManager.getInstance();
    }
 
    public void execution(SignChangeEvent e) {
@@ -27,8 +27,8 @@ public class SBSignPlaceEvent {
 
          Player player = e.getPlayer();
 
-         // check permission
-         if (!permission.checkPermission(player, "sb.place")) {
+         // check _permission
+         if (!_permission.checkPermission(player, "sb.place")) {
             return;
          }
 
@@ -37,9 +37,9 @@ public class SBSignPlaceEvent {
          int z = e.getBlock().getLocation().getBlockZ();
          String owner = e.getPlayer().getName();
 
-         if (sql.isSign(x, y, z) == -1) {
-            sql.insertSign(owner, x, y, z);
-            sql.CaliculatePlayerCount(owner);
+         if (_sql.isSign(x, y, z) == -1) {
+            _sql.insertSign(owner, x, y, z);
+            _sql.CaliculatePlayerCount(owner);
          }
 
          e.setLine(0, ChatColor.BLUE + "SocialBuild");
@@ -51,6 +51,6 @@ public class SBSignPlaceEvent {
 
    }
 
-   private SQLWrapper sql;
-   private PermissionManager permission;
+   private SQLWrapper _sql;
+   private PermissionManager _permission;
 }

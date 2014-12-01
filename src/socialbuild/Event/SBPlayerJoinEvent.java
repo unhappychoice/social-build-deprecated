@@ -15,26 +15,24 @@ import socialbuild.Utility.SQLWrapper;
 public class SBPlayerJoinEvent {
 
    public SBPlayerJoinEvent() {
-
-      sql = SQLWrapper.getInstance();
-      permission = PermissionManager.getInstance();
+      _sql = SQLWrapper.getInstance();
+      _permission = PermissionManager.getInstance();
    }
 
    public void execution(PlayerJoinEvent e) {
-
-      String playername = e.getPlayer().getName();
-      sql.CaliculatePlayerCount(playername);
+      String name = e.getPlayer().getName();
+      _sql.CaliculatePlayerCount(name);
 
       // demote
-      if (sql.getPlayerCount(playername) < Config.PROMOTE_GOOD.get(0)) {
-         permission.demoteGroup(playername);
+      if (_sql.getPlayerCount(name) < Config.PROMOTE_GOOD.get(0)) {
+         _permission.demoteGroup(name);
       }
       // promote
-      if (sql.getPlayerCount(playername) >= Config.PROMOTE_GOOD.get(0)) {
-         permission.promoteGroup(playername);
+      if (_sql.getPlayerCount(name) >= Config.PROMOTE_GOOD.get(0)) {
+         _permission.promoteGroup(name);
       }
    }
 
-   private PermissionManager permission;
-   private SQLWrapper sql;
+   private PermissionManager _permission;
+   private SQLWrapper _sql;
 }

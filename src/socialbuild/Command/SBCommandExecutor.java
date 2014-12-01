@@ -20,74 +20,45 @@ import socialbuild.Utility.SQLWrapper;
 public class SBCommandExecutor implements CommandExecutor {
 
    public SBCommandExecutor(JavaPlugin plugin, Logger log) {
-      this.plugin = plugin;
-      this.log = log;
-      this.sql = SQLWrapper.getInstance();
-      this.permission = PermissionManager.getInstance();
+      _plugin = plugin;
+      _log = log;
+      _sql = SQLWrapper.getInstance();
+      _permission = PermissionManager.getInstance();
    }
 
    @Override
-   public boolean onCommand(CommandSender sender, Command cmd, String label,
-         String[] args) {
+   public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 
-      if (cmd.getName().equalsIgnoreCase("sb")) {
-
-         if (args.length == 0
-               && permission.checkPermission(sender, "sb.self")) {
-
-            command_show_self(sender);
-            return true;
-
-         } else if (args[0].equalsIgnoreCase("update")
-               && permission.checkPermission(sender, "sb.update")) {
-
-            command_update_owner(sender, args[1], args[2]);
-            return true;
-
-         } else if (args[0].equalsIgnoreCase("top")
-               && permission.checkPermission(sender, "sb.top")) {
-
-            command_show_top(sender);
-            return true;
-
-         } else if (args[0].equalsIgnoreCase("reload")
-               && permission.checkPermission(sender, "sb.reload")) {
-
-            command_reload(sender);
-            return true;
-
-         } else if (permission.checkPermission(sender, "sb.other")) {
-
-            command_show_other(sender, args[0]);
-            return true;
-
-         }
-
+      if (!cmd.getName().equalsIgnoreCase("sb")) {
+         return false;
       }
 
-      return false;
+      if (args.length == 0 && _permission.checkPermission(sender, "sb.self")) {
+         command_show_self(sender);
+      } else if (args[0].equalsIgnoreCase("update") && _permission.checkPermission(sender, "sb.update")) {
+         command_update_owner(sender, args[1], args[2]);
+      } else if (args[0].equalsIgnoreCase("top") && _permission.checkPermission(sender, "sb.top")) {
+         command_show_top(sender);
+      } else if (args[0].equalsIgnoreCase("reload") && _permission.checkPermission(sender, "sb.reload")) {
+         command_reload(sender);
+      } else if (_permission.checkPermission(sender, "sb.other")) {
+         command_show_other(sender, args[0]);
+      } else {
+         return false;
+      }
+      return true;
    }
 
    private boolean command_show_self(CommandSender sender) {
-
-      int count = 0;
-
-      sql.CaliculatePlayerCount(sender.getName());
-
-      count = sql.getPlayerCount(sender.getName());
-
-      sender.sendMessage(ChatColor.DARK_AQUA + "you have " + count
-            + " good !!");
-
+      _sql.CaliculatePlayerCount(sender.getName());
+      int count = _sql.getPlayerCount(sender.getName());
+      sender.sendMessage(ChatColor.DARK_AQUA + "you have " + count + " good !!");
       return true;
-
    }
 
    private boolean command_show_top(CommandSender sender) {
-
       String[] message = new String[12];
-      message = sql.getRanking();
-
+      message = _sql.getRanking();
       for (int i = 0; i < 12; i++) {
          if (message[i] == null) {
             return true;
@@ -98,39 +69,27 @@ public class SBCommandExecutor implements CommandExecutor {
    }
 
    private boolean command_reload(CommandSender sender) {
-
-      log.info("start reloading");
-
-      plugin.reloadConfig();
-
-      log.info("reload completed");
-
+      _log.info("start reloading");
+      _plugin.reloadConfig();
+      _log.info("reload completed");
       return true;
    }
 
    private boolean command_show_other(CommandSender sender, String playername) {
-
-      int count = 0;
-
-      sql.CaliculatePlayerCount(playername);
-      count = sql.getPlayerCount(playername);
-
-      sender.sendMessage(ChatColor.DARK_AQUA + playername + " have " + count
-            + " good !!");
+      _sql.CaliculatePlayerCount(playername);
+      int count = _sql.getPlayerCount(playername);
+      sender.sendMessage(ChatColor.DARK_AQUA + playername + " have " + count + " good !!");
       return true;
    }
 
-   private boolean command_update_owner(CommandSender sender,
-         String from_owner, String to_owner) {
-
-      sql.updateOwner(from_owner, to_owner);
+   private boolean command_update_owner(CommandSender sender, String from_owner, String to_owner) {
+      _sql.updateOwner(from_owner, to_owner);
       sender.sendMessage("Updated Owner!!");
-
       return true;
    }
 
-   private JavaPlugin plugin;
-   private SQLWrapper sql;
-   private Logger log;
-   private PermissionManager permission;
+   private JavaPlugin _plugin;
+   private SQLWrapper _sql;
+   private Logger _log;
+   private PermissionManager _permission;
 }

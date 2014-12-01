@@ -20,14 +20,13 @@ import socialbuild.Utility.SQLWrapper;
 public class SBSignBreakEvent {
 
    public SBSignBreakEvent() {
-      sql = SQLWrapper.getInstance();
-      permission = PermissionManager.getInstance();
+      _sql = SQLWrapper.getInstance();
+      _permission = PermissionManager.getInstance();
    }
 
    public void execute(BlockBreakEvent e) {
 
-      if (e.getBlock().getType().equals(Material.WALL_SIGN)
-            || e.getBlock().getType().equals(Material.SIGN_POST)) {
+      if (e.getBlock().getType().equals(Material.WALL_SIGN) || e.getBlock().getType().equals(Material.SIGN_POST)) {
 
          // Get Sign Location
          Sign sign = (Sign) e.getBlock().getState();
@@ -38,45 +37,36 @@ public class SBSignBreakEvent {
          int z = sign.getLocation().getBlockZ();
 
          // Check if there is the sign and Get ID
-         int signid = sql.isSign(x, y, z);
+         int signid = _sql.isSign(x, y, z);
          if (signid != -1) {
 
             // Check permission
-            if (!permission.checkPermission(player, "sb.break")) {
+            if (!_permission.checkPermission(player, "sb.break")) {
                return;
             }
 
             String owner;
-            owner = sql.getOwner(signid);
+            owner = _sql.getOwner(signid);
 
             // Check can break sign
-            if ((player.getName().equals(owner) || player
-                  .hasPermission("sb.break.other"))
-                  && player.getGameMode().equals(GameMode.SURVIVAL)) {
+            if ((player.getName().equals(owner) || player.hasPermission("sb.break.other")) && player.getGameMode().equals(GameMode.SURVIVAL)) {
 
-               sql.deleteSign(x, y, z);
-               sql.deletePlayer(signid);
-               sql.CaliculatePlayerCount(owner);
+               _sql.deleteSign(x, y, z);
+               _sql.deletePlayer(signid);
+               _sql.CaliculatePlayerCount(owner);
 
                // demote
-               if (sql.getPlayerCount(owner) == Config.PROMOTE_GOOD.get(0) - 1) {
-                  permission.demoteGroup(owner);
+               if (_sql.getPlayerCount(owner) == Config.PROMOTE_GOOD.get(0) - 1) {
+                  _permission.demoteGroup(owner);
                }
-
-            }
-
-            else {
-
+            } else {
                e.getPlayer().sendMessage(Messages.ERROR_BREAK);
                e.setCancelled(true);
-               return;
-
             }
-
          }
       }
    }
 
-   private SQLWrapper sql;
-   private PermissionManager permission;
+   private SQLWrapper _sql;
+   private PermissionManager _permission;
 }

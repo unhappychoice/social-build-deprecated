@@ -16,9 +16,7 @@ public class Config {
    public static ArrayList<String> GROUP_NAME;
    public static ArrayList<Integer> PROMOTE_GOOD;
 
-   private Config() {
 
-   }
 
    public static Config setConfig(JavaPlugin plugin) {
 
@@ -36,6 +34,7 @@ public class Config {
       return instance;
    }
 
+   private Config() {}
    private JavaPlugin plugin;
    private FileConfiguration config;
    private static Config instance = new Config();

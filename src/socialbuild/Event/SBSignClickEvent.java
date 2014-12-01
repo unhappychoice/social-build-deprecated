@@ -24,8 +24,8 @@ import socialbuild.Utility.SQLWrapper;
 public class SBSignClickEvent {
 
    public SBSignClickEvent() {
-      sql = SQLWrapper.getInstance();
-      permission = PermissionManager.getInstance();
+      _sql = SQLWrapper.getInstance();
+      _permission = PermissionManager.getInstance();
    }
 
    public void execution(PlayerInteractEvent e) {
@@ -43,7 +43,7 @@ public class SBSignClickEvent {
 
                // Left Click
                if (e.getAction().equals(Action.LEFT_CLICK_BLOCK)) {
-                  if (permission.checkPermission(player, "sb.vote")) {
+                  if (_permission.checkPermission(player, "sb.vote")) {
 
                      LeftClick(sign, playername, e);
 
@@ -51,7 +51,7 @@ public class SBSignClickEvent {
 
                   // Right Click
                } else if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
-                  if (permission.checkPermission(player, "sb.cancel")) {
+                  if (_permission.checkPermission(player, "sb.cancel")) {
 
                      RightClick(sign, playername, e);
 
@@ -72,24 +72,24 @@ public class SBSignClickEvent {
       int z = loc.getBlockZ();
 
       // Check if there is the sign
-      int signid = sql.isSign(x, y, z);
+      int signid = _sql.isSign(x, y, z);
 
       if (signid != -1) {
-         if (!sql.isPlayer(playername, signid)) {
+         if (!_sql.isPlayer(playername, signid)) {
 
             // Get parameters
-            String owner = sql.getOwner(signid);
+            String owner = _sql.getOwner(signid);
             Player ownerplayer = Bukkit.getServer().getPlayer(owner);
 
             // Prevent self good
             if (!playername.equals(owner)) {
 
                // Update the database
-               sql.insertPlayer(playername, signid);
-               sql.CaliculatePlayerCount(owner);
+               _sql.insertPlayer(playername, signid);
+               _sql.CaliculatePlayerCount(owner);
 
                // Update the sign
-               int favcount = sql.getSignCount(signid);
+               int favcount = _sql.getSignCount(signid);
                sign.setLine(1, ChatColor.DARK_AQUA + "good : " + favcount);
                sign.update();
 
@@ -103,8 +103,8 @@ public class SBSignClickEvent {
                }
 
                // promote
-               if (sql.getPlayerCount(owner) == Config.PROMOTE_GOOD.get(0)) {
-                  permission.promoteGroup(ownerplayer.getName());
+               if (_sql.getPlayerCount(owner) == Config.PROMOTE_GOOD.get(0)) {
+                  _permission.promoteGroup(ownerplayer.getName());
                }
             } else {
                e.getPlayer().sendMessage(Messages.ERROR_SELF_GOOD);
@@ -128,20 +128,20 @@ public class SBSignClickEvent {
       int z = loc.getBlockZ();
 
       // Check if there is sign
-      int signid = sql.isSign(x, y, z);
+      int signid = _sql.isSign(x, y, z);
       if (signid != -1) {
-         if (sql.isPlayer(playername, signid)) {
+         if (_sql.isPlayer(playername, signid)) {
 
             // Get parameters
-            String owner = sql.getOwner(signid);
+            String owner = _sql.getOwner(signid);
             Player ownerplayer = Bukkit.getServer().getPlayer(owner);
 
             // Update the database
-            sql.deletePlayer(playername, signid);
-            sql.CaliculatePlayerCount(owner);
+            _sql.deletePlayer(playername, signid);
+            _sql.CaliculatePlayerCount(owner);
 
             // Update the sign
-            int favcount = sql.getSignCount(signid);
+            int favcount = _sql.getSignCount(signid);
             sign.setLine(1, ChatColor.DARK_AQUA + "good : " + favcount);
             sign.update();
 
@@ -150,14 +150,14 @@ public class SBSignClickEvent {
             ownerplayer.sendMessage(playername + Messages.PLAYER_CANCELED);
 
             // demote
-            if (sql.getPlayerCount(owner) == Config.PROMOTE_GOOD.get(0) - 1) {
-               permission.demoteGroup(owner);
+            if (_sql.getPlayerCount(owner) == Config.PROMOTE_GOOD.get(0) - 1) {
+               _permission.demoteGroup(owner);
             }
          }
       }
 
    }
 
-   private SQLWrapper sql;
-   private PermissionManager permission;
+   private SQLWrapper _sql;
+   private PermissionManager _permission;
 }

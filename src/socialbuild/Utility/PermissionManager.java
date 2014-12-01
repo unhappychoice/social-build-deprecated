@@ -15,8 +15,7 @@ import ru.tehkode.permissions.bukkit.PermissionsEx;
  */
 public class PermissionManager {
 
-   private PermissionManager() {
-   }
+
 
    public static PermissionManager getInstance() {
       return instance;
@@ -72,5 +71,6 @@ public class PermissionManager {
       }
    }
 
+   private PermissionManager() {}
    private static PermissionManager instance = new PermissionManager();
 }

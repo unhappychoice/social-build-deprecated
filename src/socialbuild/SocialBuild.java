@@ -21,44 +21,33 @@ public class SocialBuild extends JavaPlugin implements Listener {
 
    @Override
    public void onEnable() {
+      initialize();
 
-      Initialize();
-      log.info("Enabled");
-
+      _log.info("Enabled");
    }
 
    @Override
    public void onDisable() {
-
-      log.info("Disabeled");
-      sql.close();
-
+      _log.info("Disabeled");
+      _sql.close();
    }
 
-   private void Initialize() {
-
+   private void initialize() {
       saveDefaultConfig();
-
-      log = getLogger();
-
       Messages.loadMessages();
-      log.info("Read the Locale File");
 
-      sql = SQLWrapper.getInstance(log);
-      sql.Connect();
-      sql.isTable();
+      _log = getLogger();
+
+      _sql = SQLWrapper.getInstance(_log);
+      _sql.Connect();
+      _sql.isTable();
 
       Config.setConfig(this);
 
-      executor = new SBCommandExecutor(this, log);
-      getCommand("sb").setExecutor(executor);
-
-      getServer().getPluginManager().registerEvents(new SBEventListener(),
-            this);
-
+      getCommand("sb").setExecutor(new SBCommandExecutor(this, _log));
+      getServer().getPluginManager().registerEvents(new SBEventListener(), this);
    }
 
-   private Logger log;
-   private SQLWrapper sql;
-   private SBCommandExecutor executor;
+   private Logger _log;
+   private SQLWrapper _sql;
 }
